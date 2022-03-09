@@ -1,9 +1,21 @@
 <script>
+	import { darkMode } from '../store/darkMode';
 	let title = 'Ninja Gaming Guides';
 
 	const updateTitle = () => {
 		title = 'something completely different';
 	};
+
+	let darkModeValue;
+	const handleClick = () => {
+		darkMode.update((value) => {
+			console.log(value);
+			return !value;
+		});
+	};
+	darkMode.subscribe((value) => {
+		darkModeValue = value;
+	});
 </script>
 
 <div class="index">
@@ -15,6 +27,9 @@
 	</p>
 	<a href="/guides">View Guides</a>
 	<a href="/about">About</a>
+	<button on:click={handleClick}>Update Dark Mode</button>
+	<p>{$darkMode}</p>
+	<p>{darkModeValue}</p>
 </div>
 
 <style>
